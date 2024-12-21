@@ -51,8 +51,21 @@ def extract_palette(image_path, num_colors=5):
     boxes = median_cut(pixels, num_colors)
     palette = get_palette(boxes)
     hex_colors = convert_palette_to_hex(palette)
-    print(hex_colors)
+    print("Pallettes_HEX:",hex_colors)
     return hex_colors
+def extract_RGB_palette(image_path, num_colors=5):
+    image = Image.open(image_path).convert("RGB")
+    image = image.resize((500, 500))
+        
+    # Convert to pixels
+    pixels = np.array(list(image.getdata()))
+        
+    # Process
+    boxes = median_cut(pixels, num_colors)
+    palette = get_palette(boxes)
+    print("Pallettes_RGB:",palette)
+    return palette
 
 # Usage
 #extract_palette("testimg.png", num_colors=5)
+#extract_RGB_palette("testimg.png", num_colors=5)
